@@ -83,7 +83,7 @@ const Header = () => {
       <div className="w-full h-20 border-b-2 border-bgSecondary  mx-auto max-w-7xl flex  items-center justify-between flex-row-reverse">
         {/* logo */}
         <div className="flex items-center justify-center gap-2  h-full ">
-          <h1 className=" text-lg font-semibold text-fontSecondary">
+          <h1 className=" text-lg font-semibold tracking-wider text-fontSecondary">
             الخطيب تكنولوجي
           </h1>
           <div className=" p-2 bg-bgSecondary rounded-md">
