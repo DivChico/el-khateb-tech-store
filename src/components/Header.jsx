@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <header className="w-full sticky top-0 z-50">
       <div
-        className={`w-full shadow-sm rounded-b-2xl bg-white/80 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-y-0" : "-translate-y-full"}`}
+        className={`w-full shadow-sm  rounded-b-2xl bg-white/80 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-y-0" : "-translate-y-full"}`}
       >
         {/* announcment bar */}
         <div className="w-full flex items-center justify-between flex-row-reverse px-16 bg-bgPrimary h-10">
