@@ -134,6 +134,7 @@ export const registerUser = async (email, password) => {
     };
 
     return {
+      //safe user is user without the password hash
       user: safeUser,
       error: null,
     };

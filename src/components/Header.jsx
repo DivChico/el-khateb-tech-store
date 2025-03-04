@@ -13,7 +13,7 @@ const Header = () => {
 
       if (scrolledUp) {
         setIsOpen(true);
-      } else if (currentScrollY > 70) {
+      } else if (currentScrollY > 100) {
         setIsOpen(false);
       }
 
