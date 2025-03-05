@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import OfferCard from "@/components/OfferCard";
 import ProductCard from "@/components/ProductCard";
 import ProductsGridDisplay from "@/components/ProductsGridDisplay";
-import Image from "next/image";
 
 export default function Home() {
   return (

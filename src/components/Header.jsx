@@ -1,8 +1,11 @@
 "use client";
+import { logoutUser } from "@/actions/auth";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({ user }) => {
+  console.log(user);
+
   const [isOpen, setIsOpen] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
 
@@ -156,13 +159,39 @@ const Header = () => {
           <div>
             {/* sign in and sign up links */}
             <div>
-              <Link
-                href="#"
-                to="/signin"
-                className="text-xs font-semibold text-fontPrimary"
-              >
-                تسجيل الدخول{" "}
-              </Link>
+              {user ? (
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <span className="text-sm text-gray-700 hidden md:block ">
+                    {user.email.split("@")[0]}{" "}
+                  </span>
+                  <Link
+                    href="#"
+                    className="text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      await logoutUser();
+                      router.refresh();
+                    }}
+                  >
+                    تسجيل الخروج{" "}
+                  </Link>
+                </div>
+              ) : (
+                <React.Fragment>
+                  <Link
+                    href="/auth/sign-in"
+                    className="text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900"
+                  >
+                    تسجيل الدخول{" "}
+                  </Link>
+                  <Link
+                    href="/auth/sign-up"
+                    className="text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900"
+                  >
+                    مستخدم جديد{" "}
+                  </Link>
+                </React.Fragment>
+              )}
             </div>
           </div>
         </div>

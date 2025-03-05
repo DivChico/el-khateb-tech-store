@@ -5,6 +5,10 @@ import { redirect } from "next/navigation";
 import React from "react";
 import zod from "zod";
 
+export const metadata = {
+  title: "الخطيب تكنولجي- تسجيل حساب جديد",
+  description: "الخطيب تكنولجي - تسجيل حساب جديد",
+};
 // validation schema
 const SignUpSchema = zod.object({
   email: zod.string().email(),
