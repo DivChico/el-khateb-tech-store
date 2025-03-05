@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductsGridDisplay = ({ sectionTitle, children, maxColums }) => {
   return (
-    <section className="max-w-7xl mx-auto my-10">
+    <section className="max-w-7xl mx-auto my-10   relative">
       <div className="flex items-center h-16  flex-row-reverse justify-between border-b border-bgSecondary ">
         <div className=" border-fontTertiary border-b-2 h-full py-4 ">
           <h2 className=" font-bold text-fontSecondary">{sectionTitle}</h2>
@@ -15,7 +15,7 @@ const ProductsGridDisplay = ({ sectionTitle, children, maxColums }) => {
         </button>
       </div>
       <div
-        className={`py-8 h-80 grid grid-cols-1 md:grid-cols-3 ${maxColums ? "" + maxColums : "lg:grid-cols-5"} gap-4 justify-items-center`}
+        className={`py-8  grid grid-cols-1 md:grid-cols-3 ${maxColums ? "" + maxColums : "lg:grid-cols-5"} gap-4 justify-items-center`}
       >
         {" "}
         {children}

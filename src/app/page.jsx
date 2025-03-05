@@ -4,17 +4,19 @@ import Hero from "@/components/Hero";
 import OfferCard from "@/components/OfferCard";
 import ProductCard from "@/components/ProductCard";
 import ProductsGridDisplay from "@/components/ProductsGridDisplay";
+import { getAllProducts } from "@/sanity/lib/client";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getAllProducts();
+  products.length = 5;
+
   return (
     <div className="bg-white text-black min-h-screen ">
       <Hero />
       <ProductsGridDisplay sectionTitle={"افضل العروض"}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </ProductsGridDisplay>
       <ProductsGridDisplay sectionTitle={"التصنيفات"}>
         <CategoryCard

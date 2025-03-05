@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 import localFont from "next/font/local";
 import { getCurrentSession } from "@/actions/auth";
+import { SanityLive } from "@/sanity/lib/live";
 
 export const metadata = {
   title: "الخطيب تكنولجي - المتجر الالكتروني",
@@ -18,6 +19,7 @@ export default async function RootLayout({ children }) {
       <body className={`antialiased ${myFont.className}`}>
         <Header user={user} />
         {children}
+        <SanityLive />
       </body>
     </html>
   );
