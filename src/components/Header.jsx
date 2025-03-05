@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { useCartStore } from "@/stores/cart-store";
+import { useShallow } from "zustand/shallow";
 
 const Header = ({ user }) => {
   console.log(user);
