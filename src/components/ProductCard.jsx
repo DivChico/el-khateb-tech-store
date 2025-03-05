@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
         href={`/product/${product._id}`}
         className="w-full text-center bg-gradient-to-r from-fontSecondary to-fontPrimary text-white py-2 rounded-full text-xs font-bold hover:brightness-110 transition-all"
       >
-        اضافة الى السلة{" "}
+        عرض المنتج{" "}
       </Link>
     </div>
   );

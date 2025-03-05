@@ -2,13 +2,20 @@
 import { logoutUser } from "@/actions/auth";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import SearchBar from "./SearchBar";
+import { useCartStore } from "@/stores/cart-store";
 
 const Header = ({ user }) => {
   console.log(user);
 
   const [isOpen, setIsOpen] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
-
+  const { open, getTotalItems } = useCartStore(
+    useShallow((state) => ({
+      open: state.open,
+      getTotalItems: state.getTotalItems,
+    }))
+  );
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -39,7 +46,7 @@ const Header = ({ user }) => {
       >
         {/* announcment bar */}
         <div className="w-full flex items-center justify-between flex-row-reverse px-16 bg-blue-50 text-gray-900 h-10">
-          <p className="text-xs font-semibold text-gray-900">
+          <p className="text-xs  text-gray-700 leading-relaxed">
             اهلا وسهلا بك الى اكبر معرض للاجهزة الاكترونية في قطاع غزة{" "}
           </p>
           <div className="flex items-center flex-row-reverse gap-4 ">
@@ -187,23 +194,7 @@ const Header = ({ user }) => {
             </Link>
           </div>
           <div className="">
-            <label className="input rounded-md flex-row-reverse   bg-bgSecondary input-sm">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6 text-fontSecondary  "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-              <input type="text" className="grow  " placeholder="ابحث" />
-            </label>
+            <SearchBar />
           </div>
           <div>
             {/* sign in and sign up links */}
@@ -242,6 +233,30 @@ const Header = ({ user }) => {
                 </React.Fragment>
               )}
             </div>
+          </div>
+          <div>
+            <button
+              onClick={() => open()}
+              className="text-gray-700 hover:text-gray-900 relative"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 sm:h-6 sm:w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              <span className="absolute -top-1 -right-1 bg-black text-white text-[10px] sm:text-xs w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center">
+                {getTotalItems()}
+              </span>
+            </button>
           </div>
         </div>
         {/* categories */}
