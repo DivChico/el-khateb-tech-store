@@ -17,7 +17,9 @@ const ProductCard = ({ product }) => {
         )}
       </div>
       <div className="px-4 py-6 text-center text-fontSecondary">
-        <h3 className=" font-bold text-sm">{product.title}</h3>
+        <h3 className=" font-bold text-sm line-clamp-2 text-black">
+          {product.title}
+        </h3>
         <div className="flex items-center gap-2 justify-center">
           <span className="text-lg font-bold text-fontTertiary">
             ${(product.price || 0).toFixed(2)}
@@ -33,7 +35,7 @@ const ProductCard = ({ product }) => {
       </div>
       <Link
         href={`/product/${product._id}`}
-        className="w-full text-center bg-gradient-to-r from-fontTertiary to-fontPrimary text-white py-2 rounded-full text-xs font-bold hover:brightness-110 transition-all"
+        className="w-full text-center bg-gradient-to-r from-fontSecondary to-fontPrimary text-white py-2 rounded-full text-xs font-bold hover:brightness-110 transition-all"
       >
         اضافة الى السلة{" "}
       </Link>

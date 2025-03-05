@@ -38,15 +38,13 @@ const Header = ({ user }) => {
         className={`w-full shadow-sm  rounded-b-2xl bg-white/80 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-y-0" : "-translate-y-full"}`}
       >
         {/* announcment bar */}
-        <div className="w-full flex items-center justify-between flex-row-reverse px-16 bg-bgPrimary h-10">
-          <p className="text-xs font-semibold text-fontPrimary">
+        <div className="w-full flex items-center justify-between flex-row-reverse px-16 bg-blue-50 text-gray-900 h-10">
+          <p className="text-xs font-semibold text-gray-900">
             اهلا وسهلا بك الى اكبر معرض للاجهزة الاكترونية في قطاع غزة{" "}
           </p>
           <div className="flex items-center flex-row-reverse gap-4 ">
             <div className="flex items-center space-x-1 ">
-              <p className="text-xs font-semibold text-fontPrimary">
-                جميع العروض
-              </p>
+              <p className="text-xs font-semibold text-gray-900">جميع العروض</p>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +62,7 @@ const Header = ({ user }) => {
               </svg>
             </div>
             <div className="flex items-center space-x-1 ">
-              <p className="text-xs font-semibold text-fontPrimary">
+              <p className="text-xs font-semibold text-gray-900">
                 {" "}
                 توصيل مجاني
               </p>
@@ -85,7 +83,7 @@ const Header = ({ user }) => {
               </svg>
             </div>
             <div className="flex items-center space-x-1 ">
-              <p className="text-xs font-semibold text-fontPrimary">
+              <p className="text-xs font-semibold text-gray-900">
                 دير البلح - مفترق البركة{" "}
               </p>
 
@@ -116,9 +114,13 @@ const Header = ({ user }) => {
         <div className="w-full h-20 border-b-2 border-bgSecondary  mx-auto max-w-7xl flex  items-center justify-between flex-row-reverse">
           {/* logo */}
           <div className="flex items-center justify-center gap-2  h-full ">
-            <h1 className=" text-lg font-semibold tracking-wider text-fontSecondary">
+            <Link
+              href={"/"}
+              className=" text-lg font-semibold tracking-wider text-fontSecondary"
+              prefetch
+            >
               الخطيب تكنولوجي
-            </h1>
+            </Link>
             <div className=" p-2 bg-bgSecondary rounded-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,6 +139,53 @@ const Header = ({ user }) => {
             </div>
           </div>
           {/* search bar */}
+          <div className=" flex items-center justify-center gap-4 py-4">
+            <Link
+              key={2}
+              href={`/category/electronics`}
+              // href={`/category/${category.slug?.current}`}
+              className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
+              prefetch
+            >
+              لابتوبات
+            </Link>
+            <Link
+              key={2}
+              href={`/category/electronics`}
+              // href={`/category/${category.slug?.current}`}
+              className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
+              prefetch
+            >
+              راوترات{" "}
+            </Link>
+            <Link
+              key={2}
+              href={`/category/electronics`}
+              // href={`/category/${category.slug?.current}`}
+              className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
+              prefetch
+            >
+              اكسسورات كومبيوتر
+            </Link>
+            <Link
+              key={2}
+              href={`/category/electronics`}
+              // href={`/category/${category.slug?.current}`}
+              className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
+              prefetch
+            >
+              اكسسورات جوال
+            </Link>
+            <Link
+              key={2}
+              href={`/category/electronics`}
+              // href={`/category/${category.slug?.current}`}
+              className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
+              prefetch
+            >
+              طابعات
+            </Link>
+          </div>
           <div className="">
             <label className="input rounded-md flex-row-reverse   bg-bgSecondary input-sm">
               <svg
@@ -161,12 +210,12 @@ const Header = ({ user }) => {
             <div>
               {user ? (
                 <div className="flex items-center gap-2 sm:gap-4">
-                  <span className="text-sm text-gray-700 hidden md:block ">
+                  <span className="text-sm text-fontSecondary hidden md:block ">
                     {user.email.split("@")[0]}{" "}
                   </span>
                   <Link
                     href="#"
-                    className="text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900"
+                    className="text-xs sm:text-sm font-medium text-fontSecondary hover:text-gray-900"
                     onClick={async (e) => {
                       e.preventDefault();
                       await logoutUser();
@@ -180,13 +229,13 @@ const Header = ({ user }) => {
                 <React.Fragment>
                   <Link
                     href="/auth/sign-in"
-                    className="text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900"
+                    className="text-xs sm:text-sm font-medium text-fontSecondary hover:text-gray-900"
                   >
                     تسجيل الدخول{" "}
                   </Link>
                   <Link
                     href="/auth/sign-up"
-                    className="text-xs sm:text-sm font-medium text-gray-700 hover:text-gray-900"
+                    className="text-xs sm:text-sm font-medium text-fontSecondary hover:text-gray-900"
                   >
                     مستخدم جديد{" "}
                   </Link>
@@ -196,20 +245,6 @@ const Header = ({ user }) => {
           </div>
         </div>
         {/* categories */}
-        <div className="w-full mx-auto max-w-7xl flex items-center justify-center gap-4 py-4">
-          <button className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary">
-            <span className="text-xs font-semibold"> لابتوبات</span>
-          </button>{" "}
-          <button className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary">
-            <span className="text-xs font-semibold"> طابعات</span>
-          </button>{" "}
-          <button className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary">
-            <span className="text-xs font-semibold"> اكسسورات جوال</span>
-          </button>
-          <button className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary">
-            <span className="text-xs font-semibold"> اكسسورات كومبيوتر</span>
-          </button>
-        </div>
       </div>
     </header>
   );
