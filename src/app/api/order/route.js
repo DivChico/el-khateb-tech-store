@@ -58,8 +58,6 @@ export async function POST(req) {
       })),
       status: "PROCESSING",
     });
-    // Delete the cart
-    const delCart = await
 
     return new Response(JSON.stringify({ success: true, order }), {
       status: 201,
