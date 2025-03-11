@@ -123,13 +123,17 @@ const Cart = ({ user }) => {
 
     setLoadingProceed(true);
     try {
-      const response = await axios.post("http://localhost:3000/api/order", {
-        cartId: cartId,
-        user: user,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASEURL}/api/order`,
+        {
+          cartId: cartId,
+          user: user,
+        }
+      );
       console.log(response);
 
       await clearCart();
+      redirect("/checkout/success");
       close();
     } catch (error) {
       console.log("error: " + error);
