@@ -1,7 +1,7 @@
-import { createClient } from 'next-sanity';
+import { createClient } from "next-sanity";
 
-import { apiVersion, dataset, projectId } from '../env';
-import { sanityFetch } from '@/sanity/lib/live';
+import { apiVersion, dataset, projectId } from "../env";
+import { sanityFetch } from "@/sanity/lib/live";
 
 export const client = createClient({
   projectId,
@@ -35,9 +35,16 @@ export const getProductsByCategorySlug = async (slug) => {
 };
 
 export const getProductById = async (id) => {
+  console.log("try to get product");
+
   const query = `*[_type == "product" && _id == $id][0]`;
-  const product = await sanityFetch({ query: query, params: { id } });
-  return product.data;
+  try {
+    const product = await sanityFetch({ query: query, params: { id } });
+    return product.data;
+  } catch (error) {
+    console.log(`Product not found for id: ${id}`);
+    return;
+  }
 };
 
 export const searchProducts = async (searchQuery) => {

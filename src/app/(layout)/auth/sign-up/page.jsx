@@ -38,6 +38,8 @@ const SignUpPage = async () => {
       return { message: error };
     } else if (user) {
       await loginUser(email, password);
+      await syncCartWithUser();
+
       return redirect("/");
     }
   };

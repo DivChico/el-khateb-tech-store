@@ -18,9 +18,21 @@ export const useCartStore = create(
 
       addItem: async (item) => {
         const { cartId } = get();
+        // if (!cartId) {
+        //   console.log("no cart id found ", cartId);
+
+        //   return;
+        // }
         if (!cartId) {
-          return;
+          const cart = await getOrCreateCart();
+          set((state) => ({
+            ...state,
+            cartId: cart.id,
+            items: cart.items,
+          }));
         }
+
+        console.log("add item to cart from cart-store");
 
         const updatedCart = await updateCartItem(cartId, item.id, {
           title: item.title,
@@ -98,6 +110,7 @@ export const useCartStore = create(
             items: cart.items,
           }));
         }
+
         const syncedCart = await syncCartWithUser(cartId);
         if (syncedCart) {
           set((state) => ({
@@ -113,6 +126,8 @@ export const useCartStore = create(
       },
 
       open: () => {
+        console.log("open cart");
+
         set((state) => ({ ...state, isOpen: true }));
       },
       close: () => {

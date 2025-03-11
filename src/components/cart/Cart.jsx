@@ -2,6 +2,7 @@
 
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/stores/cart-store";
+import axios from "axios";
 import { Loader2, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,7 +54,7 @@ const CartItem = ({ item }) => {
                 onChange={(e) =>
                   updateQuantity(item.id, Number(e.target.value))
                 }
-                className="border rounded-md px-2 py-1 text-sm bg-white"
+                className="border rounded-md px-2 py-1 text-sm bg-fontSecondary text-white"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                   <option key={`cart-qty-slct-${item.id}-${num}`} value={num}>
@@ -75,7 +76,7 @@ const CartItem = ({ item }) => {
   );
 };
 
-const Cart = () => {
+const Cart = ({ user }) => {
   const {
     cartId,
     removeItem,
@@ -87,6 +88,7 @@ const Cart = () => {
     setLoaded,
     getTotalPrice,
     getTotalItems,
+    clearCart,
   } = useCartStore(
     useShallow((state) => ({
       cartId: state.cartId,
@@ -99,6 +101,7 @@ const Cart = () => {
       setLoaded: state.setLoaded,
       getTotalPrice: state.getTotalPrice,
       getTotalItems: state.getTotalItems,
+      clearCart: state.clearCart,
     }))
   );
 
@@ -117,12 +120,22 @@ const Cart = () => {
     if (!cartId || loadingProceed) {
       return;
     }
+
     setLoadingProceed(true);
+    try {
+      const response = await axios.post("http://localhost:3000/api/order", {
+        cartId: cartId,
+        user: user,
+      });
+      console.log(response);
 
-    // place and order to DB TODO
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setLoadingProceed(false);
+      await clearCart();
+      close();
+    } catch (error) {
+      console.log("error: " + error);
+    } finally {
+      setLoadingProceed(false);
+    }
   };
 
   const totalPrice = getTotalPrice();
@@ -132,7 +145,7 @@ const Cart = () => {
       {/* خلفية */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity backdrop-blur-sm"
+          className="fixed inset-0 bg-black/10 bg-opacity-50 z-50 transition-opacity backdrop-blur-sm"
           onClick={close}
         />
       )}
@@ -148,16 +161,18 @@ const Cart = () => {
         <div className="flex flex-col h-full">
           {/* رأس السلة */}
           <div className="flex items-center justify-between p-4 border-b bg-gray-50">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center gap-2">
               <ShoppingCart className="w-5 h-5" />
-              <h2 className="text-lg font-semibold">سلة المشتريات</h2>
-              <span className="bg-gray-200 px-2 py-1 rounded-full text-sm font-medium">
+              <h2 className="text-lg text-center tracking-wide text-gray-900">
+                سلة المشتريات
+              </h2>
+              <span className="bg-fontSecondary text-white px-2 py-1 rounded-full text-sm font-medium">
                 {getTotalItems()}
               </span>
             </div>
             <button
               onClick={close}
-              className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+              className="p-2 hover:bg-gray-200 text-red-600 cursor-pointer hover:animate-spin  rounded-full transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -199,51 +214,55 @@ const Cart = () => {
               {/* ملخص الطلب والدفع */}
               <div className="p-4 space-y-4">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">المجموع الفرعي</span>
-                    <span className="font-medium">
+                  <div className="flex items-center flex-row-reverse justify-between text-sm">
+                    <span className="text-fontPrimary/80">المجموع الفرعي</span>
+                    <span className="font-medium text-gray-500">
                       {formatPrice(totalPrice)}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">الشحن</span>
-                    <span className="font-medium">يتم حسابه عند الدفع</span>
+                  <div className="flex items-center flex-row-reverse justify-between text-sm">
+                    <span className="text-fontPrimary/80">الشحن</span>
+                    <span className="font-medium text-gray-500">
+                      يتم حسابه عند الدفع
+                    </span>
                   </div>
                 </div>
 
                 <div className="border-t pt-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-medium text-lg">الإجمالي</span>
-                    <span className="font-bold text-lg">
+                  <div className="flex items-center flex-row-reverse justify-between mb-4">
+                    <span className="font-medium text-lg text-fontPrimary">
+                      الإجمالي
+                    </span>
+                    <span className="font-bold text-lg text-gray-900">
                       {formatPrice(totalPrice)}
                     </span>
                   </div>
 
                   <button
-                    className="w-full bg-[#1868c9] text-white py-4 rounded-full font-bold hover:bg-[#0d4e9b] transition-colors flex items-center justify-center"
+                    className="w-full cursor-pointer bg-[#1868c9] text-white py-4 rounded-full font-bold hover:bg-[#0d4e9b] transition-colors flex items-center justify-center"
                     onClick={handelAddOrder}
                     disabled={loadingProceed}
                   >
                     {loadingProceed ? (
-                      <div className="flex items-center gap-1">
-                        جاري الانتقال إلى الدفع...
+                      <div className="flex items-center  animate-pulse justify-center gap-1">
+                        جاري تقديم طلب
                         <Loader2 className="w-4 h-4 animate-spin" />
                       </div>
                     ) : (
-                      "الانتقال إلى الدفع"
+                      " تقديم طلب"
                     )}
                   </button>
 
                   <div className="mt-4 space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <div className="flex items-center flex-row-reverse gap-2 text-sm text-gray-500">
                       <span>🔒</span>
                       <span>دفع آمن</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <div className="flex items-center flex-row-reverse gap-2 text-sm text-gray-500">
                       <span>🔄</span>
                       <span>إرجاع خلال 30 يومًا</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <div className="flex items-center flex-row-reverse gap-2 text-sm text-gray-500">
                       <span>💳</span>
                       <span>جميع طرق الدفع الرئيسية مقبولة</span>
                     </div>

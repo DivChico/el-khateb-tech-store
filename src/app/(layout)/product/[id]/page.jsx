@@ -18,7 +18,7 @@ const ProductPage = async ({ params }) => {
     return <div>Product not found</div>;
   }
 
-  const originalPrice = product.price * 5;
+  const originalPrice = product?.price * 5;
 
   return (
     <div className="bg-gray-50">
@@ -116,7 +116,7 @@ const ProductPage = async ({ params }) => {
 
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl font-bold text-[#1868c9]">
-                {formatPrice(product.price).replace("$", "")}
+                {formatPrice(product?.price).replace("$", "")}
                 شيكل{" "}
               </span>
               <span className="text-sm line-through text-gray-500">
@@ -172,7 +172,7 @@ const ProductPage = async ({ params }) => {
                 </div>
                 <span className="text-gray-500">المتبقي في المخزون: ١٢</span>
               </div>
-              <AddToCartButton />
+              <AddToCartButton product={product} />
             </div>
           </div>
         </div>

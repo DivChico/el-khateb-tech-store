@@ -7,8 +7,6 @@ import { useCartStore } from "@/stores/cart-store";
 import { useShallow } from "zustand/shallow";
 
 const Header = ({ user }) => {
-  console.log(user);
-
   const [isOpen, setIsOpen] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
   const { open, getTotalItems } = useCartStore(
@@ -92,7 +90,7 @@ const Header = ({ user }) => {
             </div>
             <div className="flex items-center space-x-1 ">
               <p className="text-xs font-semibold text-gray-900">
-                دير البلح - مفترق البركة{" "}
+                دير البلح - دوار ابو سمرة{" "}
               </p>
 
               <svg
@@ -149,7 +147,7 @@ const Header = ({ user }) => {
           {/* search bar */}
           <div className=" flex items-center justify-center gap-4 py-4">
             <Link
-              key={2}
+              key={1}
               href={`/category/electronics`}
               // href={`/category/${category.slug?.current}`}
               className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
@@ -167,7 +165,7 @@ const Header = ({ user }) => {
               راوترات{" "}
             </Link>
             <Link
-              key={2}
+              key={3}
               href={`/category/electronics`}
               // href={`/category/${category.slug?.current}`}
               className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
@@ -176,7 +174,7 @@ const Header = ({ user }) => {
               اكسسورات كومبيوتر
             </Link>
             <Link
-              key={2}
+              key={4}
               href={`/category/electronics`}
               // href={`/category/${category.slug?.current}`}
               className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"
@@ -185,7 +183,7 @@ const Header = ({ user }) => {
               اكسسورات جوال
             </Link>
             <Link
-              key={2}
+              key={5}
               href={`/category/electronics`}
               // href={`/category/${category.slug?.current}`}
               className=" bg-bgSecondary text-fontSecondary px-3 py-2 rounded-lg flex items-center justify-center hover:bg-fontSecondary hover:text-bgSecondary"

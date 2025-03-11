@@ -112,7 +112,15 @@ const SignUp = ({ action }) => {
             "إنشاء حساب"
           )}
         </button>
-
+        <p
+          onClick={() => {
+            window.location.href = "/auth/sign-in";
+          }}
+          className="text-xs mb-4 cursor-pointer text-center"
+          style={{ color: "var(--color-fontSecondary)" }}
+        >
+          لديك حساب ؟سجل الدخول!{" "}
+        </p>
         {state?.message && state.message.length > 0 && (
           <p className="text-center text-sm" style={{ color: "red" }}>
             {state.message}

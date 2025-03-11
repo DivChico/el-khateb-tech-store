@@ -1,10 +1,14 @@
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 const ProductCard = ({ product }) => {
   return (
-    <div className="  w-52 px-2 py-4 flex items-center flex-col justify-center bg-white border border-bgTertiary hover:border-fontPrimary cursor-pointer hover:scale-105 ease-in rounded-lg overflow-hidden relative">
+    <Link
+      href={`/product/${product._id}`}
+      className="  w-52 px-2 py-4 flex items-center flex-col justify-center bg-white border border-bgTertiary hover:border-fontPrimary cursor-pointer hover:scale-105 ease-in rounded-lg overflow-hidden relative"
+    >
       <div className="relative h-60  w-full">
         {product.image && (
           <Image
@@ -39,7 +43,7 @@ const ProductCard = ({ product }) => {
       >
         عرض المنتج{" "}
       </Link>
-    </div>
+    </Link>
   );
 };
 

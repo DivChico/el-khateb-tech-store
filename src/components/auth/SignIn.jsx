@@ -96,7 +96,7 @@ const SignIn = ({ action }) => {
         <button
           type="submit"
           disabled={isPending}
-          className={`w-full py-3 rounded-md transition-colors font-medium flex items-center justify-center gap-2 ${isPending ? "cursor-not-allowed" : ""}`}
+          className={`w-full cursor-pointer hover:scale-105 py-3 rounded-md transition-colors font-medium flex items-center justify-center gap-2 ${isPending ? "cursor-not-allowed" : ""}`}
           style={{
             backgroundColor: "var(--color-fontPrimary)",
             color: "white",
@@ -111,6 +111,15 @@ const SignIn = ({ action }) => {
             "تسجيل الدخول"
           )}
         </button>
+        <p
+          onClick={() => {
+            window.location.href = "/auth/sign-up";
+          }}
+          className="text-xs mb-4 cursor-pointer text-center"
+          style={{ color: "var(--color-fontSecondary)" }}
+        >
+          ليس لديك حساب ؟سجل الان!{" "}
+        </p>
 
         {state?.message && state.message.length > 0 && (
           <p className="text-center text-sm" style={{ color: "red" }}>

@@ -18,13 +18,14 @@ const AddToCartButton = ({ product }) => {
   const [isLoading, setLoading] = useState(false);
 
   const handleAddToCart = async () => {
-    if (!product.title || product.price === undefined || !product.image) {
+    if (!product.title || product?.price === undefined || !product.image) {
       return;
     }
     setLoading(true);
 
     // Add the item to the cart
     await new Promise((resolve) => setTimeout(resolve, 600));
+    console.log("try add to item");
 
     addItem({
       id: product._id,
@@ -34,25 +35,13 @@ const AddToCartButton = ({ product }) => {
       quantity: 1,
     });
 
-    try {
-      const anyWindow = window;
-
-      if (anyWindow.umami) {
-        anyWindow.umami.track("add_to_cart", {
-          cartId: cartId,
-          productId: product._id,
-          productName: product.title,
-          price: product.price,
-          currency: "USD",
-        });
-      }
-    } catch (e) {}
-
     setLoading(false);
     open();
   };
 
-  if (!product.price) {
+  if (!product?.price) {
+    console.log(`Product not found for id: ${product?._id}`);
+
     return null;
   }
 
@@ -84,7 +73,7 @@ const AddToCartButton = ({ product }) => {
           >
             <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z" />
           </svg>
-          <span>إضافة إلى السلة - {formatPrice(product.price)}</span>
+          <span>إضافة إلى السلة - {formatPrice(product?.price)}</span>
         </>
       )}
     </button>
