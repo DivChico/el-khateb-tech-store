@@ -1,4 +1,5 @@
 import { getCurrentSession, loginUser, registerUser } from "@/actions/auth";
+import { syncCartWithUser } from "@/actions/cart-actions";
 import SignUp from "@/components/auth/SignUp";
 
 import { redirect } from "next/navigation";
